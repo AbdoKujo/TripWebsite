@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trip Booking - Destinations</title>
+    <!-- Project CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Slider CSS -->
+    <link rel="stylesheet" href="css/slider.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Sora:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to avoid conflicts */
+        .header-container {
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Override slider container styles to fit in our layout */
+        .container.slider-container {
+            background-color: #000;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            max-width: 100%;
+            max-height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Adjust header for slider */
+        .header-slider {
+            padding-top: 0;
+            min-height: 100vh;
+        }
+        
+        /* Trip description section */
+        .trip-description {
+            padding: 5rem 0;
+            background-color: var(--light-grey);
+        }
+        
+        .trip-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .trip-info {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .trip-info h2 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .trip-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .trip-highlights {
+            margin: 2rem 0;
+        }
+        
+        .trip-highlights h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .highlights-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .highlights-list li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--green);
+            position: absolute;
+            left: 0;
+        }
+        
+        .booking-form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .booking-form h3 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .btn-book {
+            background-color: var(--green);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: var(--trans);
+        }
+        
+        .btn-book:hover {
+            background-color: #18a89b;
+        }
+        
+        /* Responsive styles */
+        @media screen and (min-width: 768px) {
+            .trip-details {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        /* Fix for slider header on mobile */
+        @media screen and (max-width: 767px) {
+            .container.slider-container {
+                height: calc(100vh - 60px);
+                margin-top: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- navbar from project -->
+    <nav class="navbar">
+        <div class="container flex">
+            <a href="index.html" class="site-brand">
+                Trip<span>Boss</span>
+            </a>
+
+            <button type="button" id="navbar-show-btn" class="flex">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div id="navbar-collapse">
+                <button type="button" id="navbar-close-btn" class="flex">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="gallery.html" class="nav-link">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end of navbar -->
+
+    <!-- header with slider -->
+    <header class="header-container">
+        <!-- Slider from slider.html -->
+        <div class="container slider-container">
+            <div class="effect">
+                <div class="birt">
+                   <img src="assets/bird.gif" alt="">
+                </div>
+            </div>
+            <div class="list">
+                <div class="item" id="item_0">
+                    <img src="assets/img2.jpg" alt="" />
+                   <div class="content">
+                    <h2>Ouzoud Waterfalls</h2>
+                    <div class="content1">
+                        Ouzoud Waterfalls are one of the most famous waterfalls in Morocco, a destination for tourists from inside and outside the country all year round. The waterfalls are located in the village of Tanajmilt, affiliated with the city of Azilal in the High Atlas Mountains, about 161 kilometers from Marrakech. The Ouzoud region is characterized by a healthy climate and picturesque green areas with a variety of plants and animals.
+                    </div>
+                    <div class="button">
+                        See More
+                    </div>
+                   </div>
+                </div>
+                <div class="item" id="item_1">
+                    <img src="assets/img1.jpg" alt="" />
+                   <div class="content">
+                    <h2>Ouzoud Waterfalls</h2>
+                    <div class="content1">
+                        The Ouzoud Waterfalls are a popular day trip destination from Marrakech, offering visitors a refreshing escape from the city's heat and noise. The falls are accessible by car or bus, with parking available near the entrance to the site. From there, visitors can follow a well-marked trail that leads down to the base of the falls, passing by a series of viewpoints that offer stunning panoramas of the cascades and surrounding landscape.
+                    </div>
+                    <div class="button">
+                        See More
+                    </div>
+                   </div>
+                </div>
+            </div>
+            <button id="next" class="next"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+    </header>
+    <!-- end of header -->
+
+    <!-- Trip Description Section -->
+    <section class="trip-description">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Ouzoud Waterfalls Experience</h2>
+                <p>Discover the natural beauty of Morocco's most spectacular waterfalls</p>
+            </div>
+            <div class="trip-details">
+                <div class="trip-info">
+                    <h2>About This Trip</h2>
+                    <p>Experience the breathtaking Ouzoud Waterfalls, one of Morocco's natural wonders. Located in the Atlas Mountains, these 110-meter cascades offer spectacular views and a refreshing escape from the bustling cities.</p>
+                    
+                    <p>Our guided tour takes you through olive groves (the name "Ouzoud" means "olive" in Berber) and down to the base of the falls where you can take a refreshing dip in the natural pools. Keep an eye out for the local Barbary macaques that often visit the area!</p>
+                    
+                    <div class="trip-highlights">
+                        <h3>Trip Highlights</h3>
+                        <ul class="highlights-list">
+                            <li>Witness the spectacular 110-meter waterfall cascades</li>
+                            <li>Enjoy a guided hike through olive groves and lush vegetation</li>
+                            <li>Opportunity to swim in natural pools at the base of the falls</li>
+                            <li>Spot local wildlife including Barbary macaques</li>
+                            <li>Traditional Moroccan lunch with panoramic views (optional)</li>
+                            <li>Round-trip transportation from Marrakech included</li>
+                        </ul>
+                    </div>
+                    
+                    <p>This day trip from Marrakech is perfect for nature lovers and photographers. The journey takes approximately 2.5 hours each way, giving you ample time to explore the falls and surrounding area.</p>
+                </div>
+                
+                <div class="booking-form">
+                    <h3>Book This Trip</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Trip Date</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests</label>
+                            <select id="guests" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Special Requests</label>
+                            <textarea id="message" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn-book">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Trip Description Section -->
+
+    <!-- JavaScript for navbar toggle -->
+    <script>
+        // Navbar JavaScript
+        const navbarShowBtn = document.querySelector('#navbar-show-btn');
+        const navbarCollapseDiv = document.querySelector('#navbar-collapse');
+        const navbarCloseBtn = document.querySelector('#navbar-close-btn');
+
+        // Show navbar
+        navbarShowBtn.addEventListener('click', function() {
+            navbarCollapseDiv.classList.add('navbar-collapse-rmw');
+        });
+
+        // Hide navbar
+        navbarCloseBtn.addEventListener('click', function() {
+            navbarCollapseDiv.classList.remove('navbar-collapse-rmw');
+        });
+
+        // Change header background on scroll
+        window.addEventListener('scroll', function() {
+            let scrollPos = window.scrollY;
+            if (scrollPos > 100) {
+                document.querySelector('.navbar').classList.add('navbar-cng');
+            } else {
+                document.querySelector('.navbar').classList.remove('navbar-cng');
+            }
+        });
+    </script>
+    
+    <!-- jQuery for slider -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Slider JavaScript -->
+
+</body>
+</html>
+
